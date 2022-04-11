@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { FormArray, FormBuilder } from '@angular/forms';
+import { FormArray, FormBuilder, FormControl } from '@angular/forms';
 
 @Component({
   selector: 'app-form-toppings',
@@ -8,6 +8,10 @@ import { FormArray, FormBuilder } from '@angular/forms';
 })
 export class FormToppingsComponent {
   @Input() toppings?: FormArray;
+
+  get toppingControls() {
+    return (this.toppings?.controls ?? []) as FormControl[];
+  }
 
   constructor(private fb: FormBuilder) {}
 

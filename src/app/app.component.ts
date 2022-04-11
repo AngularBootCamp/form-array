@@ -1,5 +1,10 @@
 import { Component } from '@angular/core';
-import { FormArray, FormBuilder } from '@angular/forms';
+import {
+  FormArray,
+  FormBuilder,
+  FormControl,
+  FormGroup
+} from '@angular/forms';
 
 @Component({
   selector: 'app-root',
@@ -17,9 +22,21 @@ export class AppComponent {
   cheeseTypes = ['None', 'Original', '3-Cheese Blend', 'Parmesan'];
   cheeseAmounts = ['Normal', 'Light', 'Extra'];
 
+  get pizzaFormGroups() {
+    return this.pizzasFormArray.controls as FormGroup[];
+  }
+
   constructor(private fb: FormBuilder) {
     this.pizzasFormArray = fb.array([]);
     this.addNewPizza();
+  }
+
+  getFormControlFromForm(form: FormGroup, key: string) {
+    return form.get(key) as FormControl;
+  }
+
+  getToppingArrayFromForm(form: FormGroup) {
+    return form.get('toppings') as FormArray;
   }
 
   logForm() {

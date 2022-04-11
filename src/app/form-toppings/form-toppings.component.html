@@ -8,11 +8,11 @@
   </button>
 </div>
 <div class="toppings">
-  <div class="center-align" *ngIf="!toppings?.controls.length">
+  <div class="center-align" *ngIf="!toppingControls.length">
     No Toppings Chosen...
   </div>
   <div
-    *ngFor="let topping of toppings?.controls; index as i"
+    *ngFor="let topping of toppingControls; index as i"
     class="topping"
   >
     <div>
@@ -24,8 +24,6 @@
         placeholder="Add a topping"
       />
     </div>
-    <button (click)="removeTopping(i)">
-      x
-    </button>
+    <button (click)="removeTopping(i)">x</button>
   </div>
 </div>

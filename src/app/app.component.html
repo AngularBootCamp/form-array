@@ -1,8 +1,6 @@
 <section>
   <div class="title-bar">
-    <h1>
-      Pizza Creator
-    </h1>
+    <h1>Pizza Creator</h1>
     <div class="actions">
       <button
         class="waves-effect waves-light btn orange lighten-1"
@@ -19,12 +17,12 @@
     </div>
   </div>
   <ul class="collapsible">
-    <li *ngIf="!pizzasFormArray.controls.length">
+    <li *ngIf="!pizzaFormGroups.length">
       <div class="collapsible-header center-align">
         Add a Pizza to Continue!
       </div>
     </li>
-    <li *ngFor="let form of pizzasFormArray.controls; index as i">
+    <li *ngFor="let form of pizzaFormGroups; index as i">
       <div class="collapsible-header" (click)="setActivePizzaForm(i)">
         Pizza #{{ i + 1 }}
       </div>
@@ -44,42 +42,42 @@
         <form [formGroup]="form">
           <app-form-select
             label="Size"
-            [control]="form.get('size')"
+            [control]="getFormControlFromForm(form, 'size')"
             [options]="sizes"
           ></app-form-select>
 
           <app-form-select
             label="Crust"
-            [control]="form.get('crust')"
+            [control]="getFormControlFromForm(form, 'crust')"
             [options]="crusts"
           ></app-form-select>
 
           <app-form-select
             label="Sauce Type"
-            [control]="form.get('sauceType')"
+            [control]="getFormControlFromForm(form, 'sauceType')"
             [options]="sauceTypes"
           ></app-form-select>
 
           <app-form-select
             label="Sauce Amount"
-            [control]="form.get('sauceAmount')"
+            [control]="getFormControlFromForm(form, 'sauceAmount')"
             [options]="sauceAmounts"
           ></app-form-select>
 
           <app-form-select
             label="Cheese Type"
-            [control]="form.get('cheeseType')"
+            [control]="getFormControlFromForm(form, 'cheeseType')"
             [options]="cheeseTypes"
           ></app-form-select>
 
           <app-form-select
             label="Cheese Amount"
-            [control]="form.get('cheeseAmount')"
+            [control]="getFormControlFromForm(form, 'cheeseAmount')"
             [options]="cheeseAmounts"
           ></app-form-select>
 
           <app-form-toppings
-            [toppings]="form.get('toppings')"
+            [toppings]="getToppingArrayFromForm(form)"
           ></app-form-toppings>
         </form>
       </div>
