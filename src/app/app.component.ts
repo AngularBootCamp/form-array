@@ -1,15 +1,28 @@
+import { NgIf, NgFor } from '@angular/common';
 import { Component } from '@angular/core';
 import {
   FormArray,
   FormBuilder,
   FormControl,
-  FormGroup
+  FormGroup,
+  ReactiveFormsModule
 } from '@angular/forms';
+
+import { FormSelectComponent } from './form-select/form-select.component';
+import { FormToppingsComponent } from './form-toppings/form-toppings.component';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.scss']
+  styleUrls: ['./app.component.scss'],
+  standalone: true,
+  imports: [
+    NgIf,
+    NgFor,
+    ReactiveFormsModule,
+    FormSelectComponent,
+    FormToppingsComponent
+  ]
 })
 export class AppComponent {
   pizzasFormArray: FormArray;
