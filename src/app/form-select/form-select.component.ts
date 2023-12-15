@@ -5,12 +5,12 @@ import { FormControl, ReactiveFormsModule } from '@angular/forms';
 @Component({
   selector: 'app-form-select',
   templateUrl: './form-select.component.html',
-  styleUrls: ['./form-select.component.scss'],
+  styleUrl: './form-select.component.scss',
   standalone: true,
   imports: [NgIf, ReactiveFormsModule, NgFor]
 })
 export class FormSelectComponent {
-  @Input() control?: FormControl;
-  @Input() label = '';
-  @Input() options: string[] = [];
+  @Input({ required: true }) control!: FormControl;
+  @Input({ required: true }) label!: string;
+  @Input({ required: true }) options!: string[];
 }
