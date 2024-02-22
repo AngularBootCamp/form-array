@@ -10,7 +10,7 @@ import { FormControl, ReactiveFormsModule } from '@angular/forms';
   imports: [NgIf, ReactiveFormsModule, NgFor]
 })
 export class FormSelectComponent {
-  @Input({ required: true }) control!: FormControl;
+  @Input({ required: true }) control!: FormControl<any>;
   @Input({ required: true }) label!: string;
   @Input({ required: true }) options!: string[];
 }

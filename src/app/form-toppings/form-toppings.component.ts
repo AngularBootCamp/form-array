@@ -2,8 +2,8 @@ import { NgIf, NgFor } from '@angular/common';
 import { Component, Input } from '@angular/core';
 import {
   FormArray,
-  FormBuilder,
   FormControl,
+  NonNullableFormBuilder,
   ReactiveFormsModule
 } from '@angular/forms';
 
@@ -15,13 +15,15 @@ import {
   imports: [NgIf, NgFor, ReactiveFormsModule]
 })
 export class FormToppingsComponent {
-  @Input({ required: true }) toppings!: FormArray;
+  @Input({ required: true }) toppings!: FormArray<
+    FormControl<string>
+  >;
 
   get toppingControls() {
     return (this.toppings.controls ?? []) as FormControl[];
   }
 
-  constructor(private fb: FormBuilder) {}
+  constructor(private fb: NonNullableFormBuilder) {}
 
   addNewTopping() {
     this.toppings.push(this.fb.control(''));

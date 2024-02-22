@@ -5,57 +5,62 @@
   <button (click)="logForm()">Log Form</button>
 </div>
 
-<div *ngIf="!pizzaFormGroups.length">Add a Pizza to Continue!</div>
+<div *ngIf="!pizzasFormArray.controls.length">
+  Add a Pizza to Continue!
+</div>
 
-<article *ngFor="let form of pizzaFormGroups; index as i">
-  <h2 (click)="setActivePizzaForm(i)">
+<article
+  *ngFor="let form of pizzasFormArray.controls; index as i"
+  [class.collapsed]="activePizza !== i"
+>
+  <h2 class="pizza-form-header" (click)="setActivePizzaForm(i)">
     <i class="material-icons">
       {{ activePizza === i ? 'expand_more' : 'chevron_right' }}
     </i>
     Pizza #{{ i + 1 }}
   </h2>
 
-  <div [class.collapsed]="activePizza !== i">
+  <div class="pizza-form-container">
     <button (click)="removePizza(i)">Remove Pizza</button>
 
     <form [formGroup]="form">
       <app-form-select
         label="Size"
-        [control]="getFormControlFromForm(form, 'size')"
+        [control]="form.controls.size"
         [options]="sizes"
       />
 
       <app-form-select
         label="Crust"
-        [control]="getFormControlFromForm(form, 'crust')"
+        [control]="form.controls.crust"
         [options]="crusts"
       />
 
       <app-form-select
         label="Sauce Type"
-        [control]="getFormControlFromForm(form, 'sauceType')"
+        [control]="form.controls.sauceType"
         [options]="sauceTypes"
       />
 
       <app-form-select
         label="Sauce Amount"
-        [control]="getFormControlFromForm(form, 'sauceAmount')"
+        [control]="form.controls.sauceAmount"
         [options]="sauceAmounts"
       />
 
       <app-form-select
         label="Cheese Type"
-        [control]="getFormControlFromForm(form, 'cheeseType')"
+        [control]="form.controls.cheeseType"
         [options]="cheeseTypes"
       />
 
       <app-form-select
         label="Cheese Amount"
-        [control]="getFormControlFromForm(form, 'cheeseAmount')"
+        [control]="form.controls.cheeseAmount"
         [options]="cheeseAmounts"
       />
 
-      <app-form-toppings [toppings]="getToppingArrayFromForm(form)" />
+      <app-form-toppings [toppings]="form.controls.toppings" />
     </form>
   </div>
 </article>

@@ -2,14 +2,24 @@ import { NgIf, NgFor } from '@angular/common';
 import { Component } from '@angular/core';
 import {
   FormArray,
-  FormBuilder,
   FormControl,
   FormGroup,
+  NonNullableFormBuilder,
   ReactiveFormsModule
 } from '@angular/forms';
 
 import { FormSelectComponent } from './form-select/form-select.component';
 import { FormToppingsComponent } from './form-toppings/form-toppings.component';
+
+type PizzaFormGroup = FormGroup<{
+  size: FormControl<string>;
+  crust: FormControl<string>;
+  sauceType: FormControl<string>;
+  sauceAmount: FormControl<string>;
+  cheeseType: FormControl<string>;
+  cheeseAmount: FormControl<string>;
+  toppings: FormArray<FormControl<string>>;
+}>;
 
 @Component({
   selector: 'app-root',
@@ -25,7 +35,7 @@ import { FormToppingsComponent } from './form-toppings/form-toppings.component';
   ]
 })
 export class AppComponent {
-  pizzasFormArray: FormArray;
+  pizzasFormArray: FormArray<PizzaFormGroup>;
   activePizza = 0;
 
   sizes = ['Extra Small', 'Small', 'Medium', 'Large', 'Extra Large'];
@@ -35,21 +45,9 @@ export class AppComponent {
   cheeseTypes = ['None', 'Original', '3-Cheese Blend', 'Parmesan'];
   cheeseAmounts = ['Normal', 'Light', 'Extra'];
 
-  get pizzaFormGroups() {
-    return this.pizzasFormArray.controls as FormGroup[];
-  }
-
-  constructor(private fb: FormBuilder) {
-    this.pizzasFormArray = fb.array([]);
+  constructor(private fb: NonNullableFormBuilder) {
+    this.pizzasFormArray = fb.array<PizzaFormGroup>([]);
     this.addNewPizza();
-  }
-
-  getFormControlFromForm(form: FormGroup, key: string) {
-    return form.get(key) as FormControl;
-  }
-
-  getToppingArrayFromForm(form: FormGroup) {
-    return form.get('toppings') as FormArray;
   }
 
   logForm() {
@@ -73,10 +71,10 @@ export class AppComponent {
 
   removePizza(index: number) {
     this.pizzasFormArray.removeAt(index);
+    this.activePizza = -1;
   }
 
   setActivePizzaForm(index: number) {
-    this.pizzasFormArray.at(0).get('toppings');
     if (this.activePizza === index) {
       this.activePizza = -1;
     } else {
