@@ -1,4 +1,3 @@
-import { NgIf, NgFor } from '@angular/common';
 import { Component, Input } from '@angular/core';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
 
@@ -7,7 +6,7 @@ import { FormControl, ReactiveFormsModule } from '@angular/forms';
   templateUrl: './form-select.component.html',
   styleUrl: './form-select.component.scss',
   standalone: true,
-  imports: [NgIf, ReactiveFormsModule, NgFor]
+  imports: [ReactiveFormsModule]
 })
 export class FormSelectComponent {
   @Input({ required: true }) control!: FormControl<any>;

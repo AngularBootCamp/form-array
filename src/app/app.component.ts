@@ -1,4 +1,3 @@
-import { NgIf, NgFor } from '@angular/common';
 import { Component } from '@angular/core';
 import {
   FormArray,
@@ -27,8 +26,6 @@ type PizzaFormGroup = FormGroup<{
   styleUrl: './app.component.scss',
   standalone: true,
   imports: [
-    NgIf,
-    NgFor,
     ReactiveFormsModule,
     FormSelectComponent,
     FormToppingsComponent

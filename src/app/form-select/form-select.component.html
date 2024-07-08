@@ -1,6 +1,10 @@
 <label [for]="label">{{ label }}:</label>
-<select [id]="label" *ngIf="control" [formControl]="control">
-  <option *ngFor="let option of options" [value]="option">
-    {{ option }}
-  </option>
-</select>
+@if (control) {
+  <select [id]="label" [formControl]="control">
+    @for (option of options; track option) {
+      <option [value]="option">
+        {{ option }}
+      </option>
+    }
+  </select>
+}

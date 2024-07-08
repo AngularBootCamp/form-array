@@ -1,4 +1,3 @@
-import { NgIf, NgFor } from '@angular/common';
 import { Component, Input } from '@angular/core';
 import {
   FormArray,
@@ -12,7 +11,7 @@ import {
   templateUrl: './form-toppings.component.html',
   styleUrl: './form-toppings.component.scss',
   standalone: true,
-  imports: [NgIf, NgFor, ReactiveFormsModule]
+  imports: [ReactiveFormsModule]
 })
 export class FormToppingsComponent {
   @Input({ required: true }) toppings!: FormArray<
